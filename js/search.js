@@ -1,5 +1,6 @@
 //dynamically add the search box to the DOM
-var btn = $(".page-header").children().first().after('<div class="student-search"><input placeholder="Search for students..."><button>Search</button></div>');
+$(".page-header").children().first().after('<div class="student-search"><input placeholder="Search for students..."></div>');
+
 
 var studentListItems = [];
 //make click handler on search button. Hide all students, then store the search value.
@@ -30,8 +31,10 @@ $('.student-search').find('input').on("keyup", function(){
 	$(studentListItems).each(function(){
 		$(this).show();
 	})
-		$(studentListItems).slice(itemsPerPage).hide();
-		$('.pagination ul').children().slice(Math.ceil(studentListItems.length / itemsPerPage)).hide();	
+	
+	$(studentListItems).slice(itemsPerPage).hide();
+	$('.pagination ul').children().show();
+	$('.pagination ul').children().slice(Math.ceil(studentListItems.length / itemsPerPage)).hide();
 		
 })
 
