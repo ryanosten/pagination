@@ -3,33 +3,34 @@
 //number of items that will appear on a page
 var itemsPerPage = 10;
 
-//we will use this to build a string to add the page links to
+//we will pages var to build a string to add the pagination links to
 var pages = '';
 
 //dynamically add the search input to the DOM
 $(".page-header").children().first().after('<div class="student-search"><input placeholder="Search for students..."></div>');
 
+//array to hold all students list items
 var studentListItems = [];
 
 /* EVENT HANDLERS */
 
 //hide all elements after itemPerPage
 $(document).ready(function(){
-//store a jQuery element representing the student list
-var studentListItems = $('.student-list li');
-studentListItems.slice(itemsPerPage).hide();	
-
+	//hide all student list items after the nth list item (nth being determined by itemsPerPage var)
+	$('.student-list li').slice(itemsPerPage).hide();	
 });
 
 //This click handler will store the text of the html element clicked and convert it to an integer
 //Then hide list of students, and then use slice to show list of students based on page clicked
-$('.pagination ul li').on("click", function(){
+$('.pagination ul li a').on("click", function(){
+	console.log("shit was clicked");
 	//count number of students, and divide by itemsPerPage to get number of pages required to build pagination
 	var pageClicked = parseInt($(this).text());
+	//hide studentListItems 
 	$(studentListItems).hide();
+	//show studentListItems based on page clicked
 	$(studentListItems).slice(itemsPerPage*pageClicked-itemsPerPage, itemsPerPage*pageClicked).show();
 });
-
 
 //add pagination elements
 $('.student-list').after('<div class="pagination"><ul></ul></div>');

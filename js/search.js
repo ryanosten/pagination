@@ -1,3 +1,8 @@
+//create paragraph to display if no search results and append it to DOM
+$('.student-list').after('<p class="no-results">There are no students by that name</p>');
+//Hide noResults
+$('.no-results').hide();
+
 /* EVENT HANDLERS */
 
 //make click handler on search button. Hide all students, then store the search value.
@@ -28,15 +33,26 @@ $('.student-search').find('input').on("keyup", function(){
 	$(studentListItems).each(function(){
 		$(this).show();
 	});
+
+	if(studentListItems.length == 0){		
+		$('.no-results').show();
+	} else {
+		$('.no-results').hide();
+	};
 	
 	//hide all elements in array indexed after the itemPerPage value
 	$(studentListItems).slice(itemsPerPage).hide();
 
 	//show all pagination list items (page links)
 	$('.pagination ul').children().show();
+	
 	//hide pagination list items (page links)that shouldn't be displayed
 	$('.pagination ul').children().slice(Math.ceil(studentListItems.length / itemsPerPage)).hide();
-		
+	
+	//hide pagination if studentListItems is less than 
+	if(studentListItems.length <= itemsPerPage){
+		$('.pagination ul').children().hide();
+	};
 });
 
 
