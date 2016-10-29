@@ -10,26 +10,15 @@ var pages = '';
 $(".page-header").children().first().after('<div class="student-search"><input placeholder="Search for students..."></div>');
 
 //array to hold all students list items
-var studentListItems = [];
+var studentListItems = $('.student-list li');
 
 /* EVENT HANDLERS */
 
 //hide all elements after itemPerPage
 $(document).ready(function(){
+	
 	//hide all student list items after the nth list item (nth being determined by itemsPerPage var)
-	$('.student-list li').slice(itemsPerPage).hide();	
-});
-
-//This click handler will store the text of the html element clicked and convert it to an integer
-//Then hide list of students, and then use slice to show list of students based on page clicked
-$('.pagination ul li a').on("click", function(){
-	console.log("shit was clicked");
-	//count number of students, and divide by itemsPerPage to get number of pages required to build pagination
-	var pageClicked = parseInt($(this).text());
-	//hide studentListItems 
-	$(studentListItems).hide();
-	//show studentListItems based on page clicked
-	$(studentListItems).slice(itemsPerPage*pageClicked-itemsPerPage, itemsPerPage*pageClicked).show();
+	$(studentListItems).slice(itemsPerPage).hide();	
 });
 
 //add pagination elements
@@ -44,6 +33,18 @@ for(i = 1; i <= Math.ceil($('.student-list li').length / itemsPerPage); i++){
 
 //add the pages list items to the unordered pagination list
 $('.pagination').children().html(pages);
+
+//This click handler will store the text of the html element clicked and convert it to an integer
+//Then hide list of students, and then use slice to show list of students based on page clicked
+$('.pagination ul li').on("click", function(){
+	//count number of students, and divide by itemsPerPage to get number of pages required to build pagination
+	var pageClicked = parseInt($(this).text());
+	//hide studentListItems 
+	$(studentListItems).hide();
+	//show studentListItems based on page clicked
+	$(studentListItems).slice(itemsPerPage*pageClicked-itemsPerPage, itemsPerPage*pageClicked).show();
+});
+
 
 
 

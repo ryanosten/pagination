@@ -19,11 +19,13 @@ $('.student-search').find('input').on("keyup", function(){
 	var searchValue = $(".student-search").find("input").val().toLowerCase();
 
 	//loop through all student list items, store the name and email for each student, then compare name and email to search value
-	//if searchValue matches name or email, push the object to the studentListItems array
 	$('.student-list').children().each(function(){
+		//store each student name
 		var studentName = $(this).find("h3").text();
+		//store each student email
 		var studentEmail = $(this).find(".email").text();
 
+		//if searchValue matches name or email, push the object to the studentListItems array
 		if(studentName.indexOf(searchValue) != -1 || studentEmail.indexOf(searchValue) != -1 ){
 			studentListItems.push(this);
 		}
@@ -34,6 +36,7 @@ $('.student-search').find('input').on("keyup", function(){
 		$(this).show();
 	});
 
+	//if no students in list item array, then show the no results paragraph, else, hide no results paragraph
 	if(studentListItems.length == 0){		
 		$('.no-results').show();
 	} else {
